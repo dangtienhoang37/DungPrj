@@ -131,7 +131,7 @@ exports.getWordByTopic = async (topic) => {
 
 exports.getWordTopics = async () => {
   try {
-    const list = await WordModel.distinct("Topics");
+    const list = await WordModel.distinct("topics");
     if (list.length == 0) {
       return null;
     }
