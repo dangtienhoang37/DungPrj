@@ -7,8 +7,12 @@ const QuizModel = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'listening',
   },
+  GrammarId: {
+    type: Schema.Types.ObjectId,
+    ref: 'grammars',
+  }
 
-  //questions:  [{ type: Schema.Types.ObjectId, ref: 'question' }]
+  // questions:  [{ type: Schema.Types.ObjectId, ref: 'question' }]
 });
 
 module.exports = mongoose.model('Quiz', QuizModel);

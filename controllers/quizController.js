@@ -5,6 +5,9 @@ const {
   deleteQuizById,
   deleteQuizByListenId,
 } = require("../services/quizService");
+const {
+  getGrammarById
+} = require("../services/grammarService")
 const { getListenById, getAllListen, } = require("../services/listeningService");
 const { getAllGrammars } = require("../services/grammarService");
 
@@ -27,6 +30,29 @@ exports.postQuiz = async (req, res) => {
     return res.status(503).json({ message: "Error, can not create quiz." });
   } catch (error) {
     return res.status(503).json({ message: "Error, can not create quiz." });
+  }
+};
+
+// post quiz grammar
+exports.postQuizG = async (req, res) => {
+  try {
+    const Grammarid = req.params.id;
+    //check if quiz existed
+    const grammar = await getGrammarById(Grammarid);
+    if (!grammar) {
+      return res.status(400).json({ message: "Error, Not found quiz." });
+    }
+
+    // create quiz
+    const quiz = await createQuiz({ Grammarid });
+
+    if (quiz != null) {
+      return res.status(200).json({ quiz });
+    }
+    return res.status(503).json({ message: "Error, can not create quiz.1" });
+  } catch (error) {
+    console.log(error);
+    return res.status(503).json({ message: "Error, can not create quiz.2" });
   }
 };
 

@@ -121,7 +121,7 @@ exports.getWordByTopic = async (topic) => {
     // var query = new RegExp( `^${topic}.*`,'gi');
     const list = await WordModel.find({ Topics: topic });
     if (list.length == 0) {
-      return null;
+      return {};
     }
     return list;
   } catch (error) {

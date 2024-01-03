@@ -5,7 +5,7 @@ const { uploadVideo, uploadImage } = require("../services/commonService");
 //create ipa
 exports.postIPA = async (req, res) => {
   try {
-    const { Audio, MouthShape, Type, Examples,Description, Phonetic, Video, Image } =
+    const { Audio, MouthShape, Type, Title, Examples,Description, Phonetic, Video, Image } =
       req.body;
 
     //video
@@ -42,6 +42,7 @@ exports.postIPA = async (req, res) => {
     // create IPA
     const ipa = await IPAModel.create({
       Audio: audUrl,
+      Title,
       MouthShape,
       Type,
       Examples,
@@ -54,10 +55,10 @@ exports.postIPA = async (req, res) => {
     if (ipa != null) {
       return res.status(201).json({ ipa });
     }
-    return res.status(503).json({ message: "Error, can not create IPA." });
+    return res.status(503).json({ message: "Error, can not create IPA1." });
   } catch (error) {
     console.error("POST ERROR: ", error);
-    return res.status(503).json({ message: "Error, can not create IPA." });
+    return res.status(503).json({ message: "Error, can not create IPA2." });
   }
 };
 
